@@ -1,0 +1,26 @@
+<div class="book<%= book.photo.nil? ? " info_visible" : "" %>">
+		<div>
+			<h2 style="white-space:normal"><%= book.title %></h2>
+			<ul>
+				<!--<li><span class="gray"><%= book.category_id %></span></li>-->
+				<li><%= book.writer %></li>
+				<% unless book.publish.nil? %><li><%= book.publish.strftime "%Y/%m/%d" %>&nbsp;出版</li><% end %>
+				<!--<li><span class="gray"><%= book.shelf_id %></span></li>-->
+				<li><%= book.page %>&nbsp;ページ</li>
+			</ul>
+			<%= link_to "くわしく", book_path(book.id) ,class: "blue", style: "font-size:15px;font-family:'mplus';border:none;border-radius:0;display:inline-block;position:absolute;bottom:5px;left:0;width:100%;text-indent:-15px;" %>
+<% if false %>
+			<% if book.lending? %>
+				<%= link_to "くわしく", book_path(book.id) ,class: "blue", style: "font-size:15px;font-family:'mplus';border:none;border-radius:0;display:inline-block;position:absolute;bottom:5px;left:0;width:100%;text-indent:-15px;" %>
+		  <% else %>
+				<%= form_for @lend = Lend.new, url: { controller: "books", action: "_lend" } do |f| %>
+					<%= f.hidden_field :title, value: book.title, name:"title" %>
+					<%= f.submit "借りる", class: "blue no_blackui cube_button", style: "font-size:15px;font-family:'mplus';border:none;border-radius:0;display:inline-block;position:absolute;bottom:5px;left:0;width:100%;" %>
+				<% end %>
+	    <% end %>
+<% end %>
+		</div>
+		<% unless book.photo.nil? %>
+			<%= image_tag "/assets/book/#{book.photo}", class: "book_photo small" %>
+		<% end %>
+</div>

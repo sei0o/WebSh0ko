@@ -1,0 +1,23 @@
+<% only_lending = ( params[:raction] == "lend" ? false : true ) %>
+<% uid_sort = signed_in? ? current_user.id : 0 %>
+<% param_hash = { lending: only_lending, title: params[:title] } %>
+
+<% param_hash[:user_id] = uid_sort if only_lending %> /* そのuserが借りている本 | lendなら誰が借りているかは関係ない */
+
+<% books = _search(param_hash) %>
+document.getElementById('books').innerHTML = '<% unless books.blank? %>どの本ですか？<%= form_for @book = Book.new, url: { controller: 'books', action: "_#{params[:raction]}" }, html: { class: "miniform" } do |f| %><ul><% books.each do |book| %><li><%= f.submit "#{book["title"]}", name:"title" %></li><% end %></ul><% end %><% else %>本が見つかりませんでした。<% end %>';
+/*
+
+<% unless books.blank? %>
+	どの本ですか？
+	<%= form_for @book = Book.new, url: { controller: 'books', action: "_#{params[:raction]}" }, html: { class: "miniform" } do |f| %>
+		<ul>
+			<% books.each do |book| %>
+				<li><%= f.submit "#{book["title"]}", name:"title" %></li>
+			<% end %>
+		</ul>
+	<% end %>
+<% else %>本が見つかりませんでした。
+<% end %>
+
+*/

@@ -1,0 +1,11 @@
+<% provide :title, "権限変更" %>
+<% provide :pagemida, "権限変更" %>
+<% provide :require_permission, "grant" %>
+
+<%= @user.account %>をどの権限に変更しますか? (今の権限: <%= @role.name %>)
+<%= form_for :role, url: { controller: "roles", action: "_authorization" } do |f|%>
+	<div class="bui_select">
+		<%= f.select :id, @roles, { prompt: "選択してください" }, style: "width:300px;" %>
+	</div>
+	<%= f.submit "変更" %>
+<% end %>

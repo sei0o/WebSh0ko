@@ -1,0 +1,57 @@
+<% provide :title, @user[:name] %>
+<% provide :pagemida, "ユーザー詳細" %>
+<header id="userhead">
+	<%= image_tag user_icon_path(@user[:account]), class: "user_photo small", style: "border-radius:5px;" %>
+	<h1 style="display:inline;margin:0 10px;font-size:40px">
+		<%= @user[:name] %>
+	</h1>
+	<h2 style="display:inline;">.<%= @user[:account] %></h2>
+</header>
+<div id="biography" class="bio">
+	<%= @user[:bio] %>
+</div>
+<% if @user[:lending_deadline_past_book_id].any? %>
+	<div class="red">
+		<%= @user[:lending_deadline_past_book_id] %>
+	</div>
+<% end %>
+<% if @user[:now_lending_book_id].any? %>
+	<section>
+		<h2>今借りている本</h2>
+		<ul>
+			<% puts "HOGHOGEEEEE" %>
+			<% @now_lending_books.each do |nlb| %>
+				<li><%= render partial: "shared/book", locals: { book: nlb } %></li>
+			<% end %>
+		</ul>
+	</section>
+<% end %>
+<% if @lending_books.any? %>
+	<section>
+		<h2>最近借りた本</h2>
+		<ul>
+			<% @lending_books.each do |lend| %>
+				<li style="display:inline"><%= render partial: "shared/book", locals: { book: lend } %></li>	
+			<% end %>
+		</ul>
+	</section>
+<% end %>
+<% if @user[:lending_count] > 3 %>
+	<section>
+		<h2>お気に入りの本</h2>
+		<%= render partial: "shared/book", locals: { book: @favorite_book } %>
+	</section>
+	<section>
+<% end %>
+	<h2>詳細情報</h2>
+	<ul>
+		<li>今まで借りた回数: <%= @user[:lending_count] %></li>
+		<li>権限: <%= @user[:role] %></li>
+		<li>登録日: <%= timehash2str @user[:created_at] %></li>
+		<li>編集日: <%= timehash2str @user[:updated_at] %></li>
+		<li>クラスID: <%= @user[:class_id] %></li>
+	</ul>
+</section>
+<section id="account">
+	<%= link_to "アカウント編集", user_edit_path, class: "blue" %>
+</section>

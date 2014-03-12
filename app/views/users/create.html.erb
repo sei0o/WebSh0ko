@@ -1,0 +1,21 @@
+<% provide :title, "ユーザー登録" %>
+<% provide :pagemida, "ユーザー登録" %>
+<%= form_for @user, url: { controller: 'users', action: '_create' } do |f| %>
+	<%= render partial: 'shared/errormes', locals: { model: @user } %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name, placeholder: 'ニックネームまたは本名', required: true %><br>
+	<%= f.label :account %>
+	<%= f.text_field :account, placeholder: 'ex.book_freak', required: true %><br>
+	<%= f.label :email %>
+	<%= f.text_field :email, placeholder: 'hoge@foo.com' %><br>
+	<%= f.label :password %>
+	<%= f.password_field :password, required: true %><br>
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation, required: true %><br>
+	<%= f.label :icon %>
+	<%= f.file_field :icon %><br>
+	<%= f.label :bio, style: "vertical-align:top" %>
+	<%= f.text_area :bio %><br>
+	<%= f.submit "送信", {style: "margin-left:150px;width:300px;"} %>
+<% end %>

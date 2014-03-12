@@ -1,0 +1,10 @@
+<% provide :title, "ユーザー一覧" %>
+<% provide :pagemida, "ユーザー" %>
+<div class="user_box blue">
+	<span><%= @users.size %></span><br>人登録しています。
+</div>
+<ul style="display:inline">
+	<% @users.each do |user| %>
+		<li style="display:inline"><%= render partial: 'shared/user', locals: { user: user } %></li>
+	<% end %>
+</ul>

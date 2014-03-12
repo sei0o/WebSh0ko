@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  photo: MyString
+  title: MyString
+  publish: 2014-01-21 22:10:15
+  page: 1
+  lending: MyString
+  shelf_id: 1
+
+two:
+  photo: MyString
+  title: MyString
+  publish: 2014-01-21 22:10:15
+  page: 1
+  lending: MyString
+  shelf_id: 1

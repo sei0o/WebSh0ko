@@ -1,0 +1,32 @@
+<% provide :title, "「#{@book.title}」を編集" %>
+<% provide :pagemida, "編集" %>
+<% provide :require_permission, "book_update" %>
+<%= form_for @book, url: { controller: "books", action: "_edit" }, method: "POST" do |f| %>
+	<%= render partial: 'shared/errormes', locals: { model: @book } %>
+
+	<%= f.label :title %>
+	<%= f.text_field :title, required: true %><br>
+	<%= f.label :publish %>
+	<%= f.text_field :publish, placeholder: "YYYY/mm/dd" %><br>
+	<%= f.label :writer %>
+	<%= f.text_field :writer %><br>
+	<%= f.label :page %>
+	<%= f.number_field :page, placeholder: "218" %><br>
+	<%= f.label :category_id %>
+	<div class="bui_select">
+		<%= f.select :category_id, {"key"=>"value" }, { prompt: "選択してください" }, style:"width:300px;" %>
+	</div><br>
+	<%= f.label :shelf_id %>
+	<%= f.number_field :shelf_id, required: true %><br>
+	<%= f.label :rarity %>
+	<div class="bui_select">
+		<%= f.select :rarity, { "Ultra Rare"=>4, "Super Rare"=>3, "Heavy Rare"=>2, "Rare"=>1, "Normal"=>0 }, { prompt: "選択してください" }, style: "width:300px;" %>
+	</div><br>
+	 
+<% if false %>
+	<%= f.label :photo %>
+	<%= f.file_field :photo %><br>
+<% end %>
+
+	<%= f.submit "送信", {style: "margin-left:150px;width:300px;"} %> 
+<% end %>

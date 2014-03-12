@@ -1,0 +1,12 @@
+<div class="user<%= user.icon ? "" : " info_visible" %>">
+		<div>
+			<h2><%= user.name %></h2>
+			<ul>
+				<li>.<%= user.account %></li>
+			</ul>
+			<%= link_to "くわしく", user_path(user.account) ,class: "blue", style: "font-size:15px;font-family:'mplus';border:none;border-radius:0;display:inline-block;position:absolute;bottom:5px;left:0;width:100%;text-indent:-15px;" %>
+		</div>
+		<% unless user.icon.nil? %>
+			<%= image_tag user_icon_path(user.account), class: "user_photo small" %>
+		<% end %>
+</div>

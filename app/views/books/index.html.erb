@@ -1,0 +1,10 @@
+<% provide :title, "本一覧" %>
+<% provide :pagemida, "本一覧" %>
+<div class="book_box blue">
+	<span><%= @books.size %></span><br>冊あります。
+</div>
+<ul style="display:inline">
+	<% @books.each do |book| %>
+		<li style="display:inline"><%= render partial: 'shared/book', locals: { book: book } %></li>
+	<% end %>
+</ul>

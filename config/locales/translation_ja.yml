@@ -1,0 +1,34 @@
+ja:
+  activerecord:
+    models:
+      book: 本
+      lend: 貸出
+      shelf: 本棚
+      user: ユーザー
+
+    attributes:
+      book:
+        lends: 貸出
+        page: ページ
+        photo: 写真
+        publish: 出版日 
+        rarity: レアリティ
+        title: タイトル
+        writer: 著者
+        category_id: カテゴリ
+        shelf_id: 本棚番号
+
+      lend:
+        book: :activerecord.models.book
+        lending: 貸出中
+        limit: 期限
+        
+      user:
+        name: 名前
+        account: アカウント
+        authority: 権限
+        bio: 自己紹介
+        password_digest: パスワードダイジェスト
+        password: パスワード
+        password_confirmation: パスワード確認
+        icon: アイコン

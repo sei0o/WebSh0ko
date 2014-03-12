@@ -1,0 +1,41 @@
+<% provide :title, @book[:title] %>
+<% provide :pagemida, "詳細" %>
+<h1><cite><%= @book[:title] %></cite></h1>
+<a href="//google.com/#q=<%= @book[:writer] %>" rel="author" class="big"><%= @book[:writer] %></a><br>
+<div id="book_about">
+	<div id="book_photo">
+		<% unless @book[:photo].nil? %>
+			<%= image_tag "/assets/book/#{ @book[:photo] }", class: "book_photo big" %>
+		<% else %>
+			<%= image_tag "/assets/book/404.png", class: "book_photo big" %>
+		<% end %>
+	</div>
+	<ul id="book_info">
+		<li style="padding:0;font-size:20px;margin:0;">
+			<% if @book[:lending] %>
+				<div class="red no_big no_hover_effect" style="display:inline-block;padding:10px;">貸出中: <%= @book[:lending_limit].values.join "/" %>までに返却されます</div>
+			<% else %>
+				<%= form_for @lend = Lend.new, url: { controller: "books", action: "_lend" } do |f| %>
+					<%= f.hidden_field :title, value: @book[:title], name:"title" %>
+					<div class="slide_button">
+						<span class="blue" style="font-size:19px;">
+							未貸出: <%= _lend_now_limit.strftime "%Y/%m/%d" %>まで借りられます
+						</span>
+						<span class="active_show">
+							<%= f.submit "借りる",
+										class: "blue no_blackui",
+										style: "padding:2px;font-size:19px;font-family:'mplus';border:none;width:100%;height:100%;" %>
+						</span>
+					</div>
+				<% end %>
+			<% end %>
+		</li>
+		<li><span><%= @book[:page] %></span>ページ</li>
+		<% unless @book[:publish].nil? %><li><span><%= @book[:publish][:year] %>/<%= @book[:publish][:month] %>/<%= @book[:publish][:day] %></span>出版</li><% end %>
+		<% if @book[:created_at] %><li><span><%= @book[:created_at][:year] %>/<%= @book[:created_at][:month] %>/<%= @book[:created_at][:day] %></span>入庫</li><% end %>
+		<li><span><%= @book[:lending_count] || 0 %></span>貸出</li>
+		<% if @book[:last_lending] %><li><span class="no_big"><%= @book[:last_lending][:year] %>/<%= @book[:last_lending][:month] %>/<%= @book[:last_lending][:day] %>&nbsp;<%= @book[:last_lending][:hour] %>:<%= @book[:last_lending][:minute] %>:<%= @book[:last_lending][:second] %></span>最終貸出</li><% end %>
+		<li><%= link_to "編集", book_edit_path, class: "blue", style:"text-align:center;width:100px;display:inline-block;" %></li>
+		<li style="display:inline"><%= link_to "削除", book_delete_path(@book[:id]), method:"DELETE", class: "red", style:"display:inline-block;text-align:center;width:100px;" %></li>
+	</ul>
+</div>

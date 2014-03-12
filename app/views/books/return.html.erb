@@ -1,0 +1,15 @@
+<% provide :pagemida, "返却" %>
+<% provide :title, "返却" %>
+<!-- 文字認識 -->
+<%= form_for @book = Book.new, url: { controller: 'books', action: '_return'}, html: { class:"miniform" } do |f| %>
+	<%= f.submit "スキャン" %>
+<% end %>
+または
+<%= form_for @book = Book.new,remote:true, url: { controller: 'books', action: '_search'}, html: { class:"miniform", id: "lend_form" } do |f| %>
+	<%= f.text_field :title, placeholder: "タイトルを入力", name: "title", id: "lend_book" %>
+	<%= f.hidden_field :raction, value: "return", name: "raction" %>
+	<%= f.submit "検索" %>
+<% end %>
+<div id="books">
+	
+</div>

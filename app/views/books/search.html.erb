@@ -1,0 +1,29 @@
+<% provide :pagemida, "検索" %>
+<% t = @search_word.blank? ? "全ての本" : "「#{@search_word}」で検索" %>
+<% provide :title, t %>
+<%= form_for @book = Book.new, url: { controller: "books", action: "search" }, method: "GET" , class:"miniform" do |f| %>
+	<%= f.text_field :title, placeholder: "タイトル", name: "title" %>
+	<div class="bui_select" >
+		<%= f.select :category_id,  {"Rubyの基礎"=>"ruby_base"}, {prompt: "カテゴリ"}, name: "category" %>
+	</div>
+	<%= f.submit "検索", name: nil %>
+<% end %>
+<% unless @search_word.blank? %>
+	<%= @search_word %>で検索しました。<br>
+<% else %>
+	全検索しました。<br>
+<% end %>
+<% if @books.any? %>
+	<div class="book_box blue no_hover_effect" style="padding:5px;">
+		<span><%= @books.size %></span><br>冊見つかりました。
+	</div>
+	<ul style="display:inline;">
+		<% @books.each do |book| %>
+			<li style="display:inline"><%= render partial: 'shared/book', locals: { book: book } %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<div class="book_box red">
+		見つかりませんでした。
+	</div>
+<% end %>

@@ -1,0 +1,12 @@
+<% provide(:title, "Dashboard") %>
+<% provide(:pagemida, "Dashboard") %>
+<section style="white-space:nowrap;overflow-y:hidden;overflow-x:auto;">
+		<div class="blue book_box" style="margin-left:-10px;">
+			<h1 style="display:inline-block;margin-top:40%;">貸出数</h1><br>ランキング
+		</div>
+	<ul style="display:inline;white-space:nowrap;">
+		<% lending_ranking.each do |val| %>
+			<li style="display:inline"><%= render partial: "shared/book", locals: { book: val } %></li>
+		<% end %>
+	</ul>
+</section>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,700' rel='stylesheet' type='text/css'>
+  <!--<link href='http://fonts.googleapis.com/css?family=Audiowide|Roboto:400,700' rel='stylesheet' type='text/css'>-->
+  <!--<link href="http://weloveiconfonts.com/api/?family=fontawesome" rel="stylesheet" type="text/css">-->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+    </script>
+  <![endif]-->
+  <title><%= fix_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="cont">
+    <div id="side">
+      <header id="apphead">
+        <h1 style="display:inline;"><%= link_to "Web書庫", root_path %></h1>
+      </header>
+    <% if current_user %>
+      <div id="userbox" style="display:inline;">
+        <div class="drop-down-user">
+          <%= link_to image_tag(user_icon_path(current_user.account), style:"width:50px;height:50px;" ), user_path(current_user.account) %>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to "Sign in", signin_path, class: "no_big", style: "color:#ccc" %>
+    <% end %>
+      <div id="searchbox">
+        <%= form_for @book = Book.new, url: {controller: 'books',action: 'search'},html: {method: "GET"} do |f| %>
+          <%= f.text_field :title, {name: "title",placeholder: "タイトルで本検索"}  %>
+        <% end %>
+      </div>
+      <%= link_to "貸出", book_lend_path %>
+      <%= link_to "返却", book_return_path %>
+      <%= link_to "設定", set_theme_path %>
+      <% if false %>
+        <%= link_to "クラス管理", "#" , style: "height\:15%;font-size\:30px;line-height\:2.07;" %>
+      <% end %>
+      <footer id="pagefoot">
+        Created by sei0o and Kawadu.
+      </footer>
+    </div>
+    <div id="page">
+      <header id="pagehead">
+        <h1 id="pagemida"><%= yield(:pagemida) %></h1>
+      </header>
+      <main>
+        <% flash.each do |key,value| %>
+          <div class="<%= key %>"><%= value %></div>
+        <% end %>
+        <%= yield %>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
