@@ -174,36 +174,35 @@ textarea:not([class*="no_blackui"]){
 		    border-right:6px solid transparent;
 		    border-left:6px solid transparent;
 				transition: .2s;
+		}
+		&:hover{
+				&:after{
+						content: "";
+						top: 60%;
 				}
-				&:hover{
-						&:after{
-								content: "";
-								top: 60%;
-						}
+		}
+		select{
+				appearance: none;-moz-appearance: none;-webkit-appearance: none;
+				box-sizing: border-box;-moz-box-sizing: border-box;
+				border:none;
+				background-color: #222;
+				color:white;
+				border-radius:3px;
+				font-size:17px;
+				padding:5px;
+				padding-right:10px;
+				margin:5px;
+				text-overflow: "";
+				text-indent: .01px;
+				transition: .2s;
+				.mini{
+				width:100px !important;
 				}
-				select{
-						appearance: none;-moz-appearance: none;-webkit-appearance: none;
-						box-sizing: border-box;-moz-box-sizing: border-box;
-						border:none;
-						background-color: #222;
-						color:white;
-						border-radius:3px;
-						font-size:17px;
-						padding:5px;
-						padding-right:10px;
-						margin:5px;
-						text-overflow: "";
-						text-indent: .01px;
-						transition: .2s;
-						.mini{
-								width:100px !important;
-						}
-						option{
-								border:none;
-								position:absolute;
-								&:first-of-type{
-										color:#aaa;
-								}
+				option{
+					border:none;
+					position:absolute;
+						&:first-of-type{
+							color:#aaa;
 						}
 				}
 		}
