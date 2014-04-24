@@ -41,6 +41,7 @@ gem 'jbuilder', '~> 1.2' # 謎
 
 gem 'i18n_generators' # 多言語化
 
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
